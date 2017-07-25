@@ -5,13 +5,13 @@ services:
     image: hyperledger/fabric-baseimage:latest
 
   membersrvc:
-    image: ibmblockchain/fabric-membersrvc:${ARCH_TAG}
+    image: hyperledger/fabric-membersrvc:x86_64-0.6.1-preview
     extends:
       file: base/membersrvc.yaml
       service: membersrvc
 
   vp:
-    image: ibmblockchain/fabric-peer:${ARCH_TAG}
+    image: hyperledger/fabric-peer:x86_64-0.6.1-preview
     extends:
       file: base/peer-secure-base.yaml
       service: peer-secure-base
@@ -21,6 +21,7 @@ services:
       - "7053:7053"
     environment:
       - CORE_PEER_ID=vp0
+      - CORE_SECURITY_ENABLED=false
       - CORE_SECURITY_ENROLLID=vp
       - CORE_SECURITY_ENROLLSECRET=f3489fy98ghf
     links:
